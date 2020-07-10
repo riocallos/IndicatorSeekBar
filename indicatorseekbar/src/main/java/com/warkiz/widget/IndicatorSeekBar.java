@@ -647,10 +647,6 @@ public class IndicatorSeekBar extends View {
     }
 
     private float getThumbCenterX() {
-
-       /* if (mR2L) {
-            return mBackgroundTrack.left;
-        }*/
         if(mR2L) {
             return mProgressTrack.left;
         }

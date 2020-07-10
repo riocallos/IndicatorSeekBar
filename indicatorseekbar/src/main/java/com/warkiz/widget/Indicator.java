@@ -181,8 +181,6 @@ public class Indicator {
         if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
             layoutParams.setMargins(left == -1 ? layoutParams.leftMargin : left, top == -1 ? layoutParams.topMargin : top, right == -1 ? layoutParams.rightMargin : right, bottom == -1 ? layoutParams.bottomMargin : bottom);
-            //layoutParams.setMargins(right == -1 ? layoutParams.rightMargin : right, top == -1 ? layoutParams.topMargin : top, left == -1 ? layoutParams.leftMargin : left, bottom == -1 ? layoutParams.bottomMargin : bottom);
-
             view.requestLayout();
         }
     }
@@ -218,11 +216,11 @@ public class Indicator {
     }
 
     void updateArrowViewLocation(boolean isArabic, int offset) {
-        if(!isArabic) {
+        //if(!isArabic) {
             setMargin(mArrowView, offset, -1, -1, -1);
-        } else {
+        /*} else {
             setMargin(mArrowView, -1, -1, offset, -1);
-        }
+        }*/
     }
 
 
