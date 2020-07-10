@@ -5,6 +5,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -172,12 +174,15 @@ public class Indicator {
     }
 
     private void setMargin(View view, int left, int top, int right, int bottom) {
+
         if (view == null) {
             return;
         }
         if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
             layoutParams.setMargins(left == -1 ? layoutParams.leftMargin : left, top == -1 ? layoutParams.topMargin : top, right == -1 ? layoutParams.rightMargin : right, bottom == -1 ? layoutParams.bottomMargin : bottom);
+            //layoutParams.setMargins(right == -1 ? layoutParams.rightMargin : right, top == -1 ? layoutParams.topMargin : top, left == -1 ? layoutParams.leftMargin : left, bottom == -1 ? layoutParams.bottomMargin : bottom);
+
             view.requestLayout();
         }
     }
@@ -204,12 +209,20 @@ public class Indicator {
         }
     }
 
-    void updateIndicatorLocation(int offset) {
-        setMargin(mIndicatorView, offset, -1, -1, -1);
+    void updateIndicatorLocation(boolean isArabic, int offset) {
+        if(!isArabic) {
+            setMargin(mIndicatorView, offset, -1, -1, -1);
+        } else {
+            setMargin(mIndicatorView, -1, -1, offset, -1);
+        }
     }
 
-    void updateArrowViewLocation(int offset) {
-        setMargin(mArrowView, offset, -1, -1, -1);
+    void updateArrowViewLocation(boolean isArabic, int offset) {
+        if(!isArabic) {
+            setMargin(mArrowView, offset, -1, -1, -1);
+        } else {
+            setMargin(mArrowView, -1, -1, offset, -1);
+        }
     }
 
 
@@ -225,8 +238,8 @@ public class Indicator {
         refreshProgressText();
         if (mIndicatorPopW != null) {
             mIndicatorPopW.getContentView().measure(0, 0);
-            mIndicatorPopW.update(mSeekBar, (int) (touchX - mIndicatorPopW.getContentView().getMeasuredWidth() / 2),
-                    -(mSeekBar.getMeasuredHeight() + mIndicatorPopW.getContentView().getMeasuredHeight() - mSeekBar.getPaddingTop() /*- mSeekBar.getTextHeight() */ + mGap), -1, -1);
+            Log.e("INDICATOR", "(int) (touchX - mIndicatorPopW.getContentView().getMeasuredWidth() / 2) " + ((int) (touchX - mIndicatorPopW.getContentView().getMeasuredWidth() / 2)));
+            mIndicatorPopW.update(mSeekBar, (int) (touchX - mIndicatorPopW.getContentView().getMeasuredWidth() / 2), -(mSeekBar.getMeasuredHeight() + mIndicatorPopW.getContentView().getMeasuredHeight() - mSeekBar.getPaddingTop() /*- mSeekBar.getTextHeight() */ + mGap), -1, -1);
             adjustArrow(touchX);
         }
     }

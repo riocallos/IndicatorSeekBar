@@ -21,6 +21,7 @@ import android.support.annotation.RequiresApi;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
@@ -145,6 +146,8 @@ public class IndicatorSeekBar extends View {
     private int mThumbTextColor;
     private boolean mHideThumb;
     private boolean mAdjustAuto;
+
+    private boolean isArabic = false;
 
     public IndicatorSeekBar(Context context) {
         this(context, null);
@@ -644,8 +647,12 @@ public class IndicatorSeekBar extends View {
     }
 
     private float getThumbCenterX() {
-        if (mR2L) {
-            return mBackgroundTrack.right;
+
+       /* if (mR2L) {
+            return mBackgroundTrack.left;
+        }*/
+        if(mR2L) {
+            return mProgressTrack.left;
         }
         return mProgressTrack.right;
     }
@@ -1340,6 +1347,7 @@ public class IndicatorSeekBar extends View {
     }
 
     private void updateStayIndicator() {
+        Log.e("INDICATOR", "updateStayIndicator");
         if (!mIndicatorStayAlways || mIndicator == null) {
             return;
         }
@@ -1358,6 +1366,7 @@ public class IndicatorSeekBar extends View {
         }
         int indicatorOffset;
         int arrowOffset;
+
         if (measuredWidth / 2 + thumbCenterX > mMeasuredWidth) {
             indicatorOffset = mMeasuredWidth - measuredWidth;
             arrowOffset = (int) (thumbCenterX - indicatorOffset - measuredWidth / 2);
@@ -1369,8 +1378,8 @@ public class IndicatorSeekBar extends View {
             arrowOffset = 0;
         }
 
-        mIndicator.updateIndicatorLocation(indicatorOffset);
-        mIndicator.updateArrowViewLocation(arrowOffset);
+        mIndicator.updateIndicatorLocation(isArabic, isArabic ? mMeasuredWidth - indicatorOffset - measuredWidth : indicatorOffset);
+        mIndicator.updateArrowViewLocation(isArabic, arrowOffset);
     }
 
     private boolean autoAdjustThumb() {
@@ -2001,5 +2010,12 @@ public class IndicatorSeekBar extends View {
 
     /*------------------API END-------------------*/
 
+    public boolean isArabic() {
+        return isArabic;
+    }
+
+    public void setArabic(boolean arabic) {
+        isArabic = arabic;
+    }
 
 }

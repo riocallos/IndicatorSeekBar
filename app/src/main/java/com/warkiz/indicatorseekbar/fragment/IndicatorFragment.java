@@ -20,10 +20,12 @@ public class IndicatorFragment extends BaseFragment {
     protected void initView(View root) {
         //custom indicator text by java code
         IndicatorSeekBar seekBarWithProgress = root.findViewById(R.id.custom_indicator_by_java_code);
+        seekBarWithProgress.setR2L(true);
         seekBarWithProgress.setIndicatorTextFormat("${PROGRESS} %");
 
         //custom indicator text by java code
         IndicatorSeekBar seekBarWithTickText = root.findViewById(R.id.custom_indicator_by_java);
+        seekBarWithProgress.setR2L(true);
         seekBarWithTickText.setIndicatorTextFormat("${TICK_TEXT} --");
     }
 }
