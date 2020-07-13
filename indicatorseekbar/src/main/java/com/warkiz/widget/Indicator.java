@@ -236,7 +236,6 @@ public class Indicator {
         refreshProgressText();
         if (mIndicatorPopW != null) {
             mIndicatorPopW.getContentView().measure(0, 0);
-            Log.e("INDICATOR", "(int) (touchX - mIndicatorPopW.getContentView().getMeasuredWidth() / 2) " + ((int) (touchX - mIndicatorPopW.getContentView().getMeasuredWidth() / 2)));
             mIndicatorPopW.update(mSeekBar, (int) (touchX - mIndicatorPopW.getContentView().getMeasuredWidth() / 2), -(mSeekBar.getMeasuredHeight() + mIndicatorPopW.getContentView().getMeasuredHeight() - mSeekBar.getPaddingTop() /*- mSeekBar.getTextHeight() */ + mGap), -1, -1);
             adjustArrow(touchX);
         }

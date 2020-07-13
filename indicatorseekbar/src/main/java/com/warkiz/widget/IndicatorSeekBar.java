@@ -1343,7 +1343,6 @@ public class IndicatorSeekBar extends View {
     }
 
     private void updateStayIndicator() {
-        Log.e("INDICATOR", "updateStayIndicator");
         if (!mIndicatorStayAlways || mIndicator == null) {
             return;
         }
