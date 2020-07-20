@@ -21,7 +21,6 @@ import android.support.annotation.RequiresApi;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
@@ -148,6 +147,7 @@ public class IndicatorSeekBar extends View {
     private boolean mAdjustAuto;
 
     private boolean isArabic = false;
+    private int margin = 0;
 
     public IndicatorSeekBar(Context context) {
         this(context, null);
@@ -1348,7 +1348,7 @@ public class IndicatorSeekBar extends View {
         }
         mIndicator.setProgressTextView(getIndicatorTextString());
         mIndicatorContentView.measure(0, 0);
-        int measuredWidth = mIndicatorContentView.getMeasuredWidth();
+        int measuredWidth = mIndicatorContentView.getMeasuredWidth() - margin;
         float thumbCenterX = getThumbCenterX();
 
         if (mScreenWidth == -1) {
@@ -2011,6 +2011,15 @@ public class IndicatorSeekBar extends View {
 
     public void setArabic(boolean arabic) {
         isArabic = arabic;
+    }
+
+
+    public int getMargin() {
+        return margin;
+    }
+
+    public void setMargin(int margin) {
+        this.margin = margin;
     }
 
 }
