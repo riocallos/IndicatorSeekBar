@@ -1551,7 +1551,8 @@ public class IndicatorSeekBar extends View {
         } else if (mIndicatorTextFormat != null && mIndicatorTextFormat.contains(FORMAT_PROGRESS)) {
             return mIndicatorTextFormat.replace(FORMAT_PROGRESS, getProgressString(mProgress));
         }
-        return getProgressString(mProgress);
+        return mIndicatorTextFormat;
+        //return getProgressString(mProgress);
     }
 
     /*------------------API START-------------------*/
